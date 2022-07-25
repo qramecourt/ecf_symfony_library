@@ -38,7 +38,17 @@ class AuthorRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    public function findByUser() {
+        return $this->createQueryBuilder('e')
+            // je fais la jointure sur le User avvec e, et le renomme u
+        ->join('e.User','u')
+        //je ne retiens que le profil éditeur associé à l'utilisateur passé en paramètre de la fonction.
+        ->andWhere('u.id = :userId')
+        ->setParameter('userId', $user->getId())
+        //j'exécute la requete 
+        ->getQuery()
+        ->getOnerOrNullResult();
+    }
 //    /**
 //     * @return Author[] Returns an array of Author objects
 //     */
@@ -63,4 +73,4 @@ class AuthorRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-}
+    }

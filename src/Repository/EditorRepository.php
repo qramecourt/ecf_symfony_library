@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Editor;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -48,8 +49,10 @@ class EditorRepository extends ServiceEntityRepository
         ->setParameter('userId', $user->getId())
         //j'exécute la requete 
         ->getQuery()
-        ->getResult();
-        // penser à tester 
+        ->getOnerOrNullResult();
+        /* penser à tester en mettant ce code dans le controller: 
+
+        */
 
     }
 //    /**
